@@ -1,7 +1,12 @@
 const express = require('express');
 
 const app = express();
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-const server = http.createServer(app);
+// order matters 
+app.use(adminRoutes);
+app.use(shopRoutes);
+
 // comment for checking updated pushing email on git account 
-server.listerner(3000);
+app.listen(3000);
