@@ -1,15 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const bodyParser = require('body-parser')
 const path = require('path');
+const express = require('express');
 const rootDir = require('../utils/path');
-const app = express();
+const router = express.Router();
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// parse application/json
-app.use(bodyParser.json());
+const products = [];
 
 router.get('/add-product', (req, res, next) => {
     res.sendFile(
@@ -19,7 +13,11 @@ router.get('/add-product', (req, res, next) => {
 });
 
 router.post('/add-product', (req, res, next) => {
+    products.push({ title: req.body.title });
     res.redirect('/');
 })
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;
+
+// module.exports = router;
